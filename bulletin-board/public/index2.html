@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #myDiv{
+      background-color: blue;
+      height: 200px;
+      width: 200px;
+    }
+    </style>
+    <meta charset="utf-8">
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <title>Component Lifecycle</title>
+</head>
+<body>
+  <div id="react-container"></div>
+
+	<script type="text/babel">
+    //react component life cycle methods for:
+    //mounting, creation, lifetime, teardown
+    class Box extends React.Component {
+      //load data, do things before DOM renders
+  		// componentWillMount() {
+			// 	alert('component is about to mount')
+      // }
+
+      //methods after mounting
+  		// componentDidMount() {
+			// 	alert('component has just mounted')
+      // }
+      constructor (props) {
+        super(props)
+        this.state = {
+          backgroundColor: 'purple'
+        }
+        this.update=this.update.bind(this)
+      }
+
+      update() {
+        this.setState({
+          backgroundColor: 'green'
+        })
+      }
+
+      componentDidUpdate() {
+				alert('component has been updated')
+      }
+
+   render() {
+				return (
+          <div id="myDiv"
+          style={this.state}
+          onClick={this.update}
+          ></div>
+				)
+			}
+		}
+    
+    ReactDOM.render(
+      <Box />,
+      document.getElementById('react-container')
+    )
+	</script>
+
+</body>
+</html>
